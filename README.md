@@ -1,5 +1,6 @@
 # Mexicans-Drug-Cartel-Network-Analysis
 ## Links:
+* https://projects.iq.harvard.edu/files/ptr/files/cosciarios.pdf
 * http://www.statoids.com/umx.html
 * http://www.michelecoscia.com/?page_id=1032
 * https://www.publico.es/internacional/guerra-narco-desangra-ciudad-juarez.html
