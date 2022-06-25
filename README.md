@@ -3,8 +3,6 @@
 ## Info
 L’analisi che andremo ad effettuare riguarda le citazioni dei cartelli messicani sul motore di ricerca di Google, nella sezione delle news, tra il 1990 e il 2010. 
 
-VIDEO
-
 Gli obbiettivi dell’indagine sono quelli di comprendere quali dei cartelli presi in considerazione sono stati i più attivi durante quel periodo di tempo e su quali stati hanno avuto maggior influenza. Tutte queste analisi saranno accompagnate dalla descrizione dei contesti storici per avere una spiegazione globale dei dati presentati.
 
 ![mappa_aree_cartelli](https://user-images.githubusercontent.com/104555763/175779396-958e6c23-098e-48b3-813a-18e7ffaa71f6.png)
