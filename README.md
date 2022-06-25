@@ -22,7 +22,7 @@ Per le varie operazioni e la gestione dei dati sono state utilizzate le seguenti
 * Collections: www.docs.python.org/3/library/collections.html
 
 Le Network sono state create tramite l’utilizzo delle librerie:
-* NetworkX: networkx.org/
+* NetworkX: https://networkx.org/
 * pyvis: https://pyvis.readthedocs.io/en/latest/
 * MatPlotLib: https://matplotlib.org/
 
