@@ -1,0 +1,108 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-network@latest/styles/vis-network.css" type="text/css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vis-network@latest/dist/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1000px;
+            height: 1000px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "green", "id": "1", "label": "1", "shape": "dot", "size": 10}, {"color": "blue", "id": "1997", "label": "1997", "shape": "dot", "size": 10}, {"color": "green", "id": "2", "label": "2", "shape": "dot", "size": 10}, {"color": "blue", "id": "1993", "label": "1993", "shape": "dot", "size": 10}, {"color": "blue", "id": "1995", "label": "1995", "shape": "dot", "size": 10}, {"color": "blue", "id": "1996", "label": "1996", "shape": "dot", "size": 10}, {"color": "blue", "id": "1998", "label": "1998", "shape": "dot", "size": 10}, {"color": "green", "id": "7", "label": "7", "shape": "dot", "size": 10}, {"color": "green", "id": "8", "label": "8", "shape": "dot", "size": 10}, {"color": "green", "id": "11", "label": "11", "shape": "dot", "size": 10}, {"color": "green", "id": "14", "label": "14", "shape": "dot", "size": 10}, {"color": "blue", "id": "1999", "label": "1999", "shape": "dot", "size": 10}, {"color": "green", "id": "15", "label": "15", "shape": "dot", "size": 10}, {"color": "green", "id": "18", "label": "18", "shape": "dot", "size": 10}, {"color": "green", "id": "21", "label": "21", "shape": "dot", "size": 10}, {"color": "green", "id": "25", "label": "25", "shape": "dot", "size": 10}, {"color": "blue", "id": "1991", "label": "1991", "shape": "dot", "size": 10}, {"color": "blue", "id": "1994", "label": "1994", "shape": "dot", "size": 10}, {"color": "green", "id": "26", "label": "26", "shape": "dot", "size": 10}, {"color": "green", "id": "28", "label": "28", "shape": "dot", "size": 10}, {"color": "green", "id": "30", "label": "30", "shape": "dot", "size": 10}, {"color": "red", "id": "Sinaloa", "label": "Sinaloa", "shape": "dot", "size": 10}]);
+        edges = new vis.DataSet([{"from": "1", "label": 1, "to": "1997", "weight": 1}, {"from": "2", "label": 1, "to": "1993", "weight": 1}, {"from": "2", "label": 1, "to": "1995", "weight": 1}, {"from": "2", "label": 1, "to": "1996", "weight": 1}, {"from": "2", "label": 1, "to": "1997", "weight": 1}, {"from": "2", "label": 1, "to": "1998", "weight": 1}, {"from": "7", "label": 1, "to": "1993", "weight": 1}, {"from": "7", "label": 1, "to": "1998", "weight": 1}, {"from": "8", "label": 1, "to": "1993", "weight": 1}, {"from": "8", "label": 1, "to": "1996", "weight": 1}, {"from": "8", "label": 1, "to": "1997", "weight": 1}, {"from": "11", "label": 1, "to": "1993", "weight": 1}, {"from": "14", "label": 1, "to": "1993", "weight": 1}, {"from": "14", "label": 1, "to": "1995", "weight": 1}, {"from": "14", "label": 1, "to": "1996", "weight": 1}, {"from": "14", "label": 1, "to": "1997", "weight": 1}, {"from": "14", "label": 1, "to": "1998", "weight": 1}, {"from": "14", "label": 1, "to": "1999", "weight": 1}, {"from": "15", "label": 1, "to": "1997", "weight": 1}, {"from": "15", "label": 1, "to": "1998", "weight": 1}, {"from": "18", "label": 1, "to": "1995", "weight": 1}, {"from": "21", "label": 1, "to": "1993", "weight": 1}, {"from": "25", "label": 1, "to": "1991", "weight": 1}, {"from": "25", "label": 1, "to": "1993", "weight": 1}, {"from": "25", "label": 1, "to": "1994", "weight": 1}, {"from": "25", "label": 1, "to": "1995", "weight": 1}, {"from": "25", "label": 1, "to": "1997", "weight": 1}, {"from": "25", "label": 1, "to": "1998", "weight": 1}, {"from": "26", "label": 1, "to": "1991", "weight": 1}, {"from": "26", "label": 1, "to": "1995", "weight": 1}, {"from": "26", "label": 1, "to": "1998", "weight": 1}, {"from": "28", "label": 1, "to": "1993", "weight": 1}, {"from": "28", "label": 1, "to": "1997", "weight": 1}, {"from": "30", "label": 1, "to": "1993", "weight": 1}, {"from": "30", "label": 1, "to": "1999", "weight": 1}, {"from": "1997", "label": 10, "to": "Sinaloa", "weight": 10}, {"from": "1993", "label": 12, "to": "Sinaloa", "weight": 12}, {"from": "1995", "label": 7, "to": "Sinaloa", "weight": 7}, {"from": "1996", "label": 3, "to": "Sinaloa", "weight": 3}, {"from": "1998", "label": 10, "to": "Sinaloa", "weight": 10}, {"from": "1999", "label": 2, "to": "Sinaloa", "weight": 2}, {"from": "1991", "label": 3, "to": "Sinaloa", "weight": 3}, {"from": "1994", "label": 2, "to": "Sinaloa", "weight": 2}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-network@latest/styles/vis-network.css" type="text/css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vis-network@latest/dist/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 750px;
+            background-color: white;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+        #loadingBar {
+            position:absolute;
+            top:0px;
+            left:0px;
+            width: 100%;
+            height: 750px;
+            background-color:rgba(200,200,200,0.8);
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -ms-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+            opacity:1;
+        }
+
+        #bar {
+            position:absolute;
+            top:0px;
+            left:0px;
+            width:20px;
+            height:20px;
+            margin:auto auto auto auto;
+            border-radius:11px;
+            border:2px solid rgba(30,30,30,0.05);
+            background: rgb(0, 173, 246); /* Old browsers */
+            box-shadow: 2px 0px 4px rgba(0,0,0,0.4);
+        }
+
+        #border {
+            position:absolute;
+            top:10px;
+            left:10px;
+            width:500px;
+            height:23px;
+            margin:auto auto auto auto;
+            box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+            border-radius:10px;
+        }
+
+        #text {
+            position:absolute;
+            top:8px;
+            left:530px;
+            width:30px;
+            height:50px;
+            margin:auto auto auto auto;
+            font-size:22px;
+            color: #000000;
+        }
+
+        div.outerBorder {
+            position:relative;
+            top:400px;
+            width:600px;
+            height:44px;
+            margin:auto auto auto auto;
+            border:8px solid rgba(0,0,0,0.1);
+            background: rgb(252,252,252); /* Old browsers */
+            background: -moz-linear-gradient(top,  rgba(252,252,252,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,252,252,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */
+            background: linear-gradient(to bottom,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+            border-radius:72px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+        }
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+<div id="loadingBar">
+    <div class="outerBorder">
+        <div id="text">0%</div>
+        <div id="border">
+            <div id="bar"></div>
+        </div>
+    </div>
+</div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "red", "color_border": "black", "font": {"color": "black"}, "id": "Beltran_Leyva", "label": "Beltran_Leyva", "shape": "dot", "value": 0}, {"color": "red", "color_border": "black", "font": {"color": "black"}, "id": "Beltran_Leyva_Family", "label": "Beltran_Leyva_Family", "shape": "dot", "value": 0}, {"color": "red", "color_border": "black", "font": {"color": "black"}, "id": "Familia", "label": "Familia", "shape": "dot", "value": 1}, {"color": "red", "color_border": "black", "font": {"color": "black"}, "id": "Golfo", "label": "Golfo", "shape": "dot", "value": 40}, {"color": "red", "color_border": "black", "font": {"color": "black"}, "id": "Juarez", "label": "Juarez", "shape": "dot", "value": 43}, {"color": "red", "color_border": "black", "font": {"color": "black"}, "id": "Sinaloa", "label": "Sinaloa", "shape": "dot", "value": 35}, {"color": "red", "color_border": "black", "font": {"color": "black"}, "id": "Sinaloa_Family", "label": "Sinaloa_Family", "shape": "dot", "value": 2}, {"color": "red", "color_border": "black", "font": {"color": "black"}, "id": "Tijuana", "label": "Tijuana", "shape": "dot", "value": 42}, {"color": "red", "color_border": "black", "font": {"color": "black"}, "id": "Zetas", "label": "Zetas", "shape": "dot", "value": 22}, {"color": "red", "color_border": "black", "font": {"color": "black"}, "id": "Otros", "label": "Otros", "shape": "dot", "value": 0}, {"color": "green", "font": {"color": "black"}, "id": "1", "label": "1", "shape": "dot", "value": 1}, {"color": "green", "font": {"color": "black"}, "id": "2", "label": "2", "shape": "dot", "value": 8}, {"color": "green", "font": {"color": "black"}, "id": "3", "label": "3", "shape": "dot", "value": 1}, {"color": "green", "font": {"color": "black"}, "id": "4", "label": "4", "shape": "dot", "value": 4}, {"color": "green", "font": {"color": "black"}, "id": "5", "label": "5", "shape": "dot", "value": 5}, {"color": "green", "font": {"color": "black"}, "id": "6", "label": "6", "shape": "dot", "value": 2}, {"color": "green", "font": {"color": "black"}, "id": "7", "label": "7", "shape": "dot", "value": 4}, {"color": "green", "font": {"color": "black"}, "id": "8", "label": "8", "shape": "dot", "value": 7}, {"color": "green", "font": {"color": "black"}, "id": "9", "label": "9", "shape": "dot", "value": 2}, {"color": "green", "font": {"color": "black"}, "id": "10", "label": "10", "shape": "dot", "value": 4}, {"color": "green", "font": {"color": "black"}, "id": "11", "label": "11", "shape": "dot", "value": 6}, {"color": "green", "font": {"color": "black"}, "id": "12", "label": "12", "shape": "dot", "value": 4}, {"color": "green", "font": {"color": "black"}, "id": "14", "label": "14", "shape": "dot", "value": 7}, {"color": "green", "font": {"color": "black"}, "id": "15", "label": "15", "shape": "dot", "value": 7}, {"color": "green", "font": {"color": "black"}, "id": "16", "label": "16", "shape": "dot", "value": 1}, {"color": "green", "font": {"color": "black"}, "id": "17", "label": "17", "shape": "dot", "value": 5}, {"color": "green", "font": {"color": "black"}, "id": "18", "label": "18", "shape": "dot", "value": 1}, {"color": "green", "font": {"color": "black"}, "id": "19", "label": "19", "shape": "dot", "value": 7}, {"color": "green", "font": {"color": "black"}, "id": "20", "label": "20", "shape": "dot", "value": 2}, {"color": "green", "font": {"color": "black"}, "id": "21", "label": "21", "shape": "dot", "value": 5}, {"color": "green", "font": {"color": "black"}, "id": "22", "label": "22", "shape": "dot", "value": 1}, {"color": "green", "font": {"color": "black"}, "id": "23", "label": "23", "shape": "dot", "value": 1}, {"color": "green", "font": {"color": "black"}, "id": "24", "label": "24", "shape": "dot", "value": 2}, {"color": "green", "font": {"color": "black"}, "id": "25", "label": "25", "shape": "dot", "value": 9}, {"color": "green", "font": {"color": "black"}, "id": "26", "label": "26", "shape": "dot", "value": 8}, {"color": "green", "font": {"color": "black"}, "id": "27", "label": "27", "shape": "dot", "value": 1}, {"color": "green", "font": {"color": "black"}, "id": "28", "label": "28", "shape": "dot", "value": 9}, {"color": "green", "font": {"color": "black"}, "id": "30", "label": "30", "shape": "dot", "value": 7}, {"color": "green", "font": {"color": "black"}, "id": "31", "label": "31", "shape": "dot", "value": 2}, {"color": "green", "font": {"color": "black"}, "id": "32", "label": "32", "shape": "dot", "value": 1}, {"color": "blue", "font": {"color": "black"}, "id": "1997_1", "label": "1997_1", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1992_2", "label": "1992_2", "shape": "dot", "value": 3}, {"color": "blue", "font": {"color": "black"}, "id": "1993_2", "label": "1993_2", "shape": "dot", "value": 4}, {"color": "blue", "font": {"color": "black"}, "id": "1994_2", "label": "1994_2", "shape": "dot", "value": 4}, {"color": "blue", "font": {"color": "black"}, "id": "1995_2", "label": "1995_2", "shape": "dot", "value": 3}, {"color": "blue", "font": {"color": "black"}, "id": "1996_2", "label": "1996_2", "shape": "dot", "value": 4}, {"color": "blue", "font": {"color": "black"}, "id": "1997_2", "label": "1997_2", "shape": "dot", "value": 5}, {"color": "blue", "font": {"color": "black"}, "id": "1998_2", "label": "1998_2", "shape": "dot", "value": 4}, {"color": "blue", "font": {"color": "black"}, "id": "1999_2", "label": "1999_2", "shape": "dot", "value": 5}, {"color": "blue", "font": {"color": "black"}, "id": "1998_3", "label": "1998_3", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1995_4", "label": "1995_4", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1996_4", "label": "1996_4", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1997_4", "label": "1997_4", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1999_4", "label": "1999_4", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1993_5", "label": "1993_5", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1994_5", "label": "1994_5", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1996_5", "label": "1996_5", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1997_5", "label": "1997_5", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1999_5", "label": "1999_5", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1997_6", "label": "1997_6", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1998_6", "label": "1998_6", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1993_7", "label": "1993_7", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1994_7", "label": "1994_7", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1995_7", "label": "1995_7", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1998_7", "label": "1998_7", "shape": "dot", "value": 5}, {"color": "blue", "font": {"color": "black"}, "id": "1993_8", "label": "1993_8", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1994_8", "label": "1994_8", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1995_8", "label": "1995_8", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1996_8", "label": "1996_8", "shape": "dot", "value": 4}, {"color": "blue", "font": {"color": "black"}, "id": "1997_8", "label": "1997_8", "shape": "dot", "value": 4}, {"color": "blue", "font": {"color": "black"}, "id": "1998_8", "label": "1998_8", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1999_8", "label": "1999_8", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1993_9", "label": "1993_9", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1994_9", "label": "1994_9", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1995_10", "label": "1995_10", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1996_10", "label": "1996_10", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1997_10", "label": "1997_10", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1999_10", "label": "1999_10", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1993_11", "label": "1993_11", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1994_11", "label": "1994_11", "shape": "dot", "value": 3}, {"color": "blue", "font": {"color": "black"}, "id": "1995_11", "label": "1995_11", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1996_11", "label": "1996_11", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1997_11", "label": "1997_11", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1999_11", "label": "1999_11", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1994_12", "label": "1994_12", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1996_12", "label": "1996_12", "shape": "dot", "value": 3}, {"color": "blue", "font": {"color": "black"}, "id": "1997_12", "label": "1997_12", "shape": "dot", "value": 3}, {"color": "blue", "font": {"color": "black"}, "id": "1998_12", "label": "1998_12", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1993_14", "label": "1993_14", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1994_14", "label": "1994_14", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1995_14", "label": "1995_14", "shape": "dot", "value": 4}, {"color": "blue", "font": {"color": "black"}, "id": "1996_14", "label": "1996_14", "shape": "dot", "value": 3}, {"color": "blue", "font": {"color": "black"}, "id": "1997_14", "label": "1997_14", "shape": "dot", "value": 4}, {"color": "blue", "font": {"color": "black"}, "id": "1998_14", "label": "1998_14", "shape": "dot", "value": 4}, {"color": "blue", "font": {"color": "black"}, "id": "1999_14", "label": "1999_14", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1993_15", "label": "1993_15", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1994_15", "label": "1994_15", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1995_15", "label": "1995_15", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1996_15", "label": "1996_15", "shape": "dot", "value": 3}, {"color": "blue", "font": {"color": "black"}, "id": "1997_15", "label": "1997_15", "shape": "dot", "value": 4}, {"color": "blue", "font": {"color": "black"}, "id": "1998_15", "label": "1998_15", "shape": "dot", "value": 4}, {"color": "blue", "font": {"color": "black"}, "id": "1999_15", "label": "1999_15", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1998_16", "label": "1998_16", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1994_17", "label": "1994_17", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1995_17", "label": "1995_17", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1997_17", "label": "1997_17", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1998_17", "label": "1998_17", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1999_17", "label": "1999_17", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1995_18", "label": "1995_18", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1993_19", "label": "1993_19", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1994_19", "label": "1994_19", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1995_19", "label": "1995_19", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1996_19", "label": "1996_19", "shape": "dot", "value": 3}, {"color": "blue", "font": {"color": "black"}, "id": "1997_19", "label": "1997_19", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1998_19", "label": "1998_19", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1999_19", "label": "1999_19", "shape": "dot", "value": 3}, {"color": "blue", "font": {"color": "black"}, "id": "1996_20", "label": "1996_20", "shape": "dot", "value": 3}, {"color": "blue", "font": {"color": "black"}, "id": "1998_20", "label": "1998_20", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1993_21", "label": "1993_21", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1996_21", "label": "1996_21", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1997_21", "label": "1997_21", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1998_21", "label": "1998_21", "shape": "dot", "value": 3}, {"color": "blue", "font": {"color": "black"}, "id": "1999_21", "label": "1999_21", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1994_22", "label": "1994_22", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1998_23", "label": "1998_23", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1996_24", "label": "1996_24", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1997_24", "label": "1997_24", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1991_25", "label": "1991_25", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1992_25", "label": "1992_25", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1993_25", "label": "1993_25", "shape": "dot", "value": 4}, {"color": "blue", "font": {"color": "black"}, "id": "1994_25", "label": "1994_25", "shape": "dot", "value": 3}, {"color": "blue", "font": {"color": "black"}, "id": "1995_25", "label": "1995_25", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1996_25", "label": "1996_25", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1997_25", "label": "1997_25", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1998_25", "label": "1998_25", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1999_25", "label": "1999_25", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1991_26", "label": "1991_26", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1993_26", "label": "1993_26", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1994_26", "label": "1994_26", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1995_26", "label": "1995_26", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1996_26", "label": "1996_26", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1997_26", "label": "1997_26", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1998_26", "label": "1998_26", "shape": "dot", "value": 4}, {"color": "blue", "font": {"color": "black"}, "id": "1999_26", "label": "1999_26", "shape": "dot", "value": 3}, {"color": "blue", "font": {"color": "black"}, "id": "1998_27", "label": "1998_27", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1991_28", "label": "1991_28", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1992_28", "label": "1992_28", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1993_28", "label": "1993_28", "shape": "dot", "value": 3}, {"color": "blue", "font": {"color": "black"}, "id": "1994_28", "label": "1994_28", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1995_28", "label": "1995_28", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1996_28", "label": "1996_28", "shape": "dot", "value": 3}, {"color": "blue", "font": {"color": "black"}, "id": "1997_28", "label": "1997_28", "shape": "dot", "value": 5}, {"color": "blue", "font": {"color": "black"}, "id": "1998_28", "label": "1998_28", "shape": "dot", "value": 3}, {"color": "blue", "font": {"color": "black"}, "id": "1999_28", "label": "1999_28", "shape": "dot", "value": 3}, {"color": "blue", "font": {"color": "black"}, "id": "1993_30", "label": "1993_30", "shape": "dot", "value": 3}, {"color": "blue", "font": {"color": "black"}, "id": "1994_30", "label": "1994_30", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1995_30", "label": "1995_30", "shape": "dot", "value": 3}, {"color": "blue", "font": {"color": "black"}, "id": "1996_30", "label": "1996_30", "shape": "dot", "value": 3}, {"color": "blue", "font": {"color": "black"}, "id": "1997_30", "label": "1997_30", "shape": "dot", "value": 3}, {"color": "blue", "font": {"color": "black"}, "id": "1998_30", "label": "1998_30", "shape": "dot", "value": 3}, {"color": "blue", "font": {"color": "black"}, "id": "1999_30", "label": "1999_30", "shape": "dot", "value": 3}, {"color": "blue", "font": {"color": "black"}, "id": "1994_31", "label": "1994_31", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1999_31", "label": "1999_31", "shape": "dot", "value": 2}, {"color": "blue", "font": {"color": "black"}, "id": "1997_32", "label": "1997_32", "shape": "dot", "value": 2}]);
+        edges = new vis.DataSet([{"from": "1997_1", "opacity": 0.1, "to": "1", "value": 1}, {"from": "1992_2", "opacity": 0.1, "to": "2", "value": 3}, {"from": "1993_2", "opacity": 0.1, "to": "2", "value": 1}, {"from": "1994_2", "opacity": 0.1, "to": "2", "value": 1}, {"from": "1995_2", "opacity": 0.1, "to": "2", "value": 1}, {"from": "1996_2", "opacity": 0.1, "to": "2", "value": 1}, {"from": "1997_2", "opacity": 0.1, "to": "2", "value": 1}, {"from": "1998_2", "opacity": 0.1, "to": "2", "value": 1}, {"from": "1999_2", "opacity": 0.1, "to": "2", "value": 1}, {"from": "1998_3", "opacity": 0.1, "to": "3", "value": 1}, {"from": "1995_4", "opacity": 0.1, "to": "4", "value": 1}, {"from": "1996_4", "opacity": 0.1, "to": "4", "value": 1}, {"from": "1997_4", "opacity": 0.1, "to": "4", "value": 1}, {"from": "1999_4", "opacity": 0.1, "to": "4", "value": 1}, {"from": "1993_5", "opacity": 0.1, "to": "5", "value": 1}, {"from": "1994_5", "opacity": 0.1, "to": "5", "value": 1}, {"from": "1996_5", "opacity": 0.1, "to": "5", "value": 1}, {"from": "1997_5", "opacity": 0.1, "to": "5", "value": 2}, {"from": "1999_5", "opacity": 0.1, "to": "5", "value": 1}, {"from": "1997_6", "opacity": 0.1, "to": "6", "value": 1}, {"from": "1998_6", "opacity": 0.1, "to": "6", "value": 1}, {"from": "1993_7", "opacity": 0.1, "to": "7", "value": 1}, {"from": "1994_7", "opacity": 0.1, "to": "7", "value": 1}, {"from": "1995_7", "opacity": 0.1, "to": "7", "value": 1}, {"from": "1998_7", "opacity": 0.1, "to": "7", "value": 1}, {"from": "1993_8", "opacity": 0.1, "to": "8", "value": 3}, {"from": "1994_8", "opacity": 0.1, "to": "8", "value": 1}, {"from": "1995_8", "opacity": 0.1, "to": "8", "value": 1}, {"from": "1996_8", "opacity": 0.1, "to": "8", "value": 2}, {"from": "1997_8", "opacity": 0.1, "to": "8", "value": 4}, {"from": "1998_8", "opacity": 0.1, "to": "8", "value": 2}, {"from": "1999_8", "opacity": 0.1, "to": "8", "value": 5}, {"from": "1993_9", "opacity": 0.1, "to": "9", "value": 1}, {"from": "1994_9", "opacity": 0.1, "to": "9", "value": 1}, {"from": "1995_10", "opacity": 0.1, "to": "10", "value": 1}, {"from": "1996_10", "opacity": 0.1, "to": "10", "value": 3}, {"from": "1997_10", "opacity": 0.1, "to": "10", "value": 1}, {"from": "1999_10", "opacity": 0.1, "to": "10", "value": 1}, {"from": "1993_11", "opacity": 0.1, "to": "11", "value": 1}, {"from": "1994_11", "opacity": 0.1, "to": "11", "value": 1}, {"from": "1995_11", "opacity": 0.1, "to": "11", "value": 1}, {"from": "1996_11", "opacity": 0.1, "to": "11", "value": 1}, {"from": "1997_11", "opacity": 0.1, "to": "11", "value": 1}, {"from": "1999_11", "opacity": 0.1, "to": "11", "value": 1}, {"from": "1994_12", "opacity": 0.1, "to": "12", "value": 1}, {"from": "1996_12", "opacity": 0.1, "to": "12", "value": 1}, {"from": "1997_12", "opacity": 0.1, "to": "12", "value": 1}, {"from": "1998_12", "opacity": 0.1, "to": "12", "value": 1}, {"from": "1993_14", "opacity": 0.1, "to": "14", "value": 2}, {"from": "1994_14", "opacity": 0.1, "to": "14", "value": 2}, {"from": "1995_14", "opacity": 0.1, "to": "14", "value": 1}, {"from": "1996_14", "opacity": 0.1, "to": "14", "value": 1}, {"from": "1997_14", "opacity": 0.1, "to": "14", "value": 1}, {"from": "1998_14", "opacity": 0.1, "to": "14", "value": 1}, {"from": "1999_14", "opacity": 0.1, "to": "14", "value": 1}, {"from": "1993_15", "opacity": 0.1, "to": "15", "value": 2}, {"from": "1994_15", "opacity": 0.1, "to": "15", "value": 1}, {"from": "1995_15", "opacity": 0.1, "to": "15", "value": 1}, {"from": "1996_15", "opacity": 0.1, "to": "15", "value": 2}, {"from": "1997_15", "opacity": 0.1, "to": "15", "value": 2}, {"from": "1998_15", "opacity": 0.1, "to": "15", "value": 1}, {"from": "1999_15", "opacity": 0.1, "to": "15", "value": 1}, {"from": "1998_16", "opacity": 0.1, "to": "16", "value": 2}, {"from": "1994_17", "opacity": 0.1, "to": "17", "value": 1}, {"from": "1995_17", "opacity": 0.1, "to": "17", "value": 1}, {"from": "1997_17", "opacity": 0.1, "to": "17", "value": 1}, {"from": "1998_17", "opacity": 0.1, "to": "17", "value": 2}, {"from": "1999_17", "opacity": 0.1, "to": "17", "value": 1}, {"from": "1995_18", "opacity": 0.1, "to": "18", "value": 1}, {"from": "1993_19", "opacity": 0.1, "to": "19", "value": 1}, {"from": "1994_19", "opacity": 0.1, "to": "19", "value": 2}, {"from": "1995_19", "opacity": 0.1, "to": "19", "value": 1}, {"from": "1996_19", "opacity": 0.1, "to": "19", "value": 2}, {"from": "1997_19", "opacity": 0.1, "to": "19", "value": 1}, {"from": "1998_19", "opacity": 0.1, "to": "19", "value": 1}, {"from": "1999_19", "opacity": 0.1, "to": "19", "value": 1}, {"from": "1996_20", "opacity": 0.1, "to": "20", "value": 1}, {"from": "1998_20", "opacity": 0.1, "to": "20", "value": 1}, {"from": "1993_21", "opacity": 0.1, "to": "21", "value": 1}, {"from": "1996_21", "opacity": 0.1, "to": "21", "value": 1}, {"from": "1997_21", "opacity": 0.1, "to": "21", "value": 1}, {"from": "1998_21", "opacity": 0.1, "to": "21", "value": 1}, {"from": "1999_21", "opacity": 0.1, "to": "21", "value": 1}, {"from": "1994_22", "opacity": 0.1, "to": "22", "value": 1}, {"from": "1998_23", "opacity": 0.1, "to": "23", "value": 1}, {"from": "1996_24", "opacity": 0.1, "to": "24", "value": 1}, {"from": "1997_24", "opacity": 0.1, "to": "24", "value": 1}, {"from": "1991_25", "opacity": 0.1, "to": "25", "value": 2}, {"from": "1992_25", "opacity": 0.1, "to": "25", "value": 1}, {"from": "1993_25", "opacity": 0.1, "to": "25", "value": 1}, {"from": "1994_25", "opacity": 0.1, "to": "25", "value": 2}, {"from": "1995_25", "opacity": 0.1, "to": "25", "value": 1}, {"from": "1996_25", "opacity": 0.1, "to": "25", "value": 1}, {"from": "1997_25", "opacity": 0.1, "to": "25", "value": 2}, {"from": "1998_25", "opacity": 0.1, "to": "25", "value": 4}, {"from": "1999_25", "opacity": 0.1, "to": "25", "value": 1}, {"from": "1991_26", "opacity": 0.1, "to": "26", "value": 1}, {"from": "1993_26", "opacity": 0.1, "to": "26", "value": 1}, {"from": "1994_26", "opacity": 0.1, "to": "26", "value": 1}, {"from": "1995_26", "opacity": 0.1, "to": "26", "value": 1}, {"from": "1996_26", "opacity": 0.1, "to": "26", "value": 1}, {"from": "1997_26", "opacity": 0.1, "to": "26", "value": 3}, {"from": "1998_26", "opacity": 0.1, "to": "26", "value": 1}, {"from": "1999_26", "opacity": 0.1, "to": "26", "value": 1}, {"from": "1998_27", "opacity": 0.1, "to": "27", "value": 1}, {"from": "1991_28", "opacity": 0.1, "to": "28", "value": 3}, {"from": "1992_28", "opacity": 0.1, "to": "28", "value": 1}, {"from": "1993_28", "opacity": 0.1, "to": "28", "value": 1}, {"from": "1994_28", "opacity": 0.1, "to": "28", "value": 4}, {"from": "1995_28", "opacity": 0.1, "to": "28", "value": 3}, {"from": "1996_28", "opacity": 0.1, "to": "28", "value": 2}, {"from": "1997_28", "opacity": 0.1, "to": "28", "value": 1}, {"from": "1998_28", "opacity": 0.1, "to": "28", "value": 2}, {"from": "1999_28", "opacity": 0.1, "to": "28", "value": 1}, {"from": "1993_30", "opacity": 0.1, "to": "30", "value": 1}, {"from": "1994_30", "opacity": 0.1, "to": "30", "value": 1}, {"from": "1995_30", "opacity": 0.1, "to": "30", "value": 1}, {"from": "1996_30", "opacity": 0.1, "to": "30", "value": 1}, {"from": "1997_30", "opacity": 0.1, "to": "30", "value": 2}, {"from": "1998_30", "opacity": 0.1, "to": "30", "value": 1}, {"from": "1999_30", "opacity": 0.1, "to": "30", "value": 3}, {"from": "1994_31", "opacity": 0.1, "to": "31", "value": 1}, {"from": "1999_31", "opacity": 0.1, "to": "31", "value": 1}, {"from": "1997_32", "opacity": 0.1, "to": "32", "value": 1}, {"from": "Sinaloa", "opacity": 0.1, "to": "1997_1", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1992_2", "value": 3}, {"from": "Zetas", "opacity": 0.1, "to": "1992_2", "value": 1}, {"from": "Sinaloa", "opacity": 0.1, "to": "1993_2", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1993_2", "value": 1}, {"from": "Zetas", "opacity": 0.1, "to": "1993_2", "value": 1}, {"from": "Golfo", "opacity": 0.1, "to": "1994_2", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1994_2", "value": 2}, {"from": "Zetas", "opacity": 0.1, "to": "1994_2", "value": 1}, {"from": "Sinaloa", "opacity": 0.1, "to": "1995_2", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1995_2", "value": 1}, {"from": "Juarez", "opacity": 0.1, "to": "1996_2", "value": 1}, {"from": "Sinaloa", "opacity": 0.1, "to": "1996_2", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1996_2", "value": 1}, {"from": "Juarez", "opacity": 0.1, "to": "1997_2", "value": 1}, {"from": "Sinaloa", "opacity": 0.1, "to": "1997_2", "value": 1}, {"from": "Sinaloa_Family", "opacity": 0.1, "to": "1997_2", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1997_2", "value": 2}, {"from": "Juarez", "opacity": 0.1, "to": "1998_2", "value": 1}, {"from": "Sinaloa", "opacity": 0.1, "to": "1998_2", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1998_2", "value": 3}, {"from": "Golfo", "opacity": 0.1, "to": "1999_2", "value": 1}, {"from": "Juarez", "opacity": 0.1, "to": "1999_2", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1999_2", "value": 1}, {"from": "Zetas", "opacity": 0.1, "to": "1999_2", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1998_3", "value": 1}, {"from": "Golfo", "opacity": 0.1, "to": "1995_4", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1996_4", "value": 1}, {"from": "Juarez", "opacity": 0.1, "to": "1997_4", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1999_4", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1993_5", "value": 1}, {"from": "Golfo", "opacity": 0.1, "to": "1994_5", "value": 1}, {"from": "Juarez", "opacity": 0.1, "to": "1996_5", "value": 1}, {"from": "Golfo", "opacity": 0.1, "to": "1997_5", "value": 2}, {"from": "Tijuana", "opacity": 0.1, "to": "1999_5", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1997_6", "value": 1}, {"from": "Juarez", "opacity": 0.1, "to": "1998_6", "value": 1}, {"from": "Sinaloa", "opacity": 0.1, "to": "1993_7", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1994_7", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1995_7", "value": 1}, {"from": "Golfo", "opacity": 0.1, "to": "1998_7", "value": 1}, {"from": "Sinaloa", "opacity": 0.1, "to": "1998_7", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1998_7", "value": 1}, {"from": "Zetas", "opacity": 0.1, "to": "1998_7", "value": 2}, {"from": "Sinaloa", "opacity": 0.1, "to": "1993_8", "value": 3}, {"from": "Golfo", "opacity": 0.1, "to": "1994_8", "value": 1}, {"from": "Juarez", "opacity": 0.1, "to": "1995_8", "value": 1}, {"from": "Golfo", "opacity": 0.1, "to": "1996_8", "value": 2}, {"from": "Juarez", "opacity": 0.1, "to": "1996_8", "value": 3}, {"from": "Sinaloa", "opacity": 0.1, "to": "1996_8", "value": 1}, {"from": "Juarez", "opacity": 0.1, "to": "1997_8", "value": 4}, {"from": "Sinaloa", "opacity": 0.1, "to": "1997_8", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1997_8", "value": 3}, {"from": "Juarez", "opacity": 0.1, "to": "1998_8", "value": 2}, {"from": "Juarez", "opacity": 0.1, "to": "1999_8", "value": 5}, {"from": "Tijuana", "opacity": 0.1, "to": "1993_9", "value": 1}, {"from": "Zetas", "opacity": 0.1, "to": "1994_9", "value": 1}, {"from": "Juarez", "opacity": 0.1, "to": "1995_10", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1996_10", "value": 3}, {"from": "Tijuana", "opacity": 0.1, "to": "1997_10", "value": 1}, {"from": "Juarez", "opacity": 0.1, "to": "1999_10", "value": 1}, {"from": "Sinaloa", "opacity": 0.1, "to": "1993_11", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1994_11", "value": 1}, {"from": "Zetas", "opacity": 0.1, "to": "1994_11", "value": 4}, {"from": "Golfo", "opacity": 0.1, "to": "1995_11", "value": 1}, {"from": "Golfo", "opacity": 0.1, "to": "1996_11", "value": 1}, {"from": "Juarez", "opacity": 0.1, "to": "1997_11", "value": 1}, {"from": "Golfo", "opacity": 0.1, "to": "1999_11", "value": 1}, {"from": "Golfo", "opacity": 0.1, "to": "1994_12", "value": 1}, {"from": "Juarez", "opacity": 0.1, "to": "1996_12", "value": 1}, {"from": "Sinaloa_Family", "opacity": 0.1, "to": "1996_12", "value": 1}, {"from": "Familia", "opacity": 0.1, "to": "1997_12", "value": 1}, {"from": "Juarez", "opacity": 0.1, "to": "1997_12", "value": 2}, {"from": "Tijuana", "opacity": 0.1, "to": "1998_12", "value": 1}, {"from": "Sinaloa", "opacity": 0.1, "to": "1993_14", "value": 2}, {"from": "Tijuana", "opacity": 0.1, "to": "1994_14", "value": 2}, {"from": "Juarez", "opacity": 0.1, "to": "1995_14", "value": 1}, {"from": "Sinaloa", "opacity": 0.1, "to": "1995_14", "value": 3}, {"from": "Tijuana", "opacity": 0.1, "to": "1995_14", "value": 1}, {"from": "Sinaloa", "opacity": 0.1, "to": "1996_14", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1996_14", "value": 1}, {"from": "Juarez", "opacity": 0.1, "to": "1997_14", "value": 1}, {"from": "Sinaloa", "opacity": 0.1, "to": "1997_14", "value": 2}, {"from": "Tijuana", "opacity": 0.1, "to": "1997_14", "value": 3}, {"from": "Juarez", "opacity": 0.1, "to": "1998_14", "value": 1}, {"from": "Sinaloa", "opacity": 0.1, "to": "1998_14", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1998_14", "value": 2}, {"from": "Sinaloa", "opacity": 0.1, "to": "1999_14", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1993_15", "value": 2}, {"from": "Zetas", "opacity": 0.1, "to": "1994_15", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1995_15", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1996_15", "value": 2}, {"from": "Zetas", "opacity": 0.1, "to": "1996_15", "value": 1}, {"from": "Juarez", "opacity": 0.1, "to": "1997_15", "value": 2}, {"from": "Sinaloa", "opacity": 0.1, "to": "1997_15", "value": 2}, {"from": "Tijuana", "opacity": 0.1, "to": "1997_15", "value": 1}, {"from": "Golfo", "opacity": 0.1, "to": "1998_15", "value": 1}, {"from": "Juarez", "opacity": 0.1, "to": "1998_15", "value": 2}, {"from": "Sinaloa", "opacity": 0.1, "to": "1998_15", "value": 1}, {"from": "Zetas", "opacity": 0.1, "to": "1999_15", "value": 1}, {"from": "Juarez", "opacity": 0.1, "to": "1998_16", "value": 2}, {"from": "Golfo", "opacity": 0.1, "to": "1994_17", "value": 1}, {"from": "Juarez", "opacity": 0.1, "to": "1995_17", "value": 1}, {"from": "Juarez", "opacity": 0.1, "to": "1997_17", "value": 1}, {"from": "Juarez", "opacity": 0.1, "to": "1998_17", "value": 2}, {"from": "Zetas", "opacity": 0.1, "to": "1999_17", "value": 1}, {"from": "Sinaloa", "opacity": 0.1, "to": "1995_18", "value": 1}, {"from": "Golfo", "opacity": 0.1, "to": "1993_19", "value": 1}, {"from": "Golfo", "opacity": 0.1, "to": "1994_19", "value": 2}, {"from": "Golfo", "opacity": 0.1, "to": "1995_19", "value": 1}, {"from": "Golfo", "opacity": 0.1, "to": "1996_19", "value": 2}, {"from": "Juarez", "opacity": 0.1, "to": "1996_19", "value": 1}, {"from": "Juarez", "opacity": 0.1, "to": "1997_19", "value": 1}, {"from": "Golfo", "opacity": 0.1, "to": "1998_19", "value": 1}, {"from": "Golfo", "opacity": 0.1, "to": "1999_19", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1999_19", "value": 2}, {"from": "Golfo", "opacity": 0.1, "to": "1996_20", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1996_20", "value": 1}, {"from": "Zetas", "opacity": 0.1, "to": "1998_20", "value": 1}, {"from": "Sinaloa", "opacity": 0.1, "to": "1993_21", "value": 1}, {"from": "Golfo", "opacity": 0.1, "to": "1996_21", "value": 1}, {"from": "Golfo", "opacity": 0.1, "to": "1997_21", "value": 1}, {"from": "Golfo", "opacity": 0.1, "to": "1998_21", "value": 1}, {"from": "Zetas", "opacity": 0.1, "to": "1998_21", "value": 1}, {"from": "Golfo", "opacity": 0.1, "to": "1999_21", "value": 1}, {"from": "Zetas", "opacity": 0.1, "to": "1994_22", "value": 1}, {"from": "Juarez", "opacity": 0.1, "to": "1998_23", "value": 1}, {"from": "Golfo", "opacity": 0.1, "to": "1996_24", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1997_24", "value": 1}, {"from": "Sinaloa", "opacity": 0.1, "to": "1991_25", "value": 2}, {"from": "Zetas", "opacity": 0.1, "to": "1992_25", "value": 1}, {"from": "Juarez", "opacity": 0.1, "to": "1993_25", "value": 1}, {"from": "Sinaloa", "opacity": 0.1, "to": "1993_25", "value": 1}, {"from": "Zetas", "opacity": 0.1, "to": "1993_25", "value": 1}, {"from": "Sinaloa", "opacity": 0.1, "to": "1994_25", "value": 2}, {"from": "Zetas", "opacity": 0.1, "to": "1994_25", "value": 1}, {"from": "Sinaloa", "opacity": 0.1, "to": "1995_25", "value": 1}, {"from": "Juarez", "opacity": 0.1, "to": "1996_25", "value": 1}, {"from": "Sinaloa", "opacity": 0.1, "to": "1997_25", "value": 2}, {"from": "Sinaloa", "opacity": 0.1, "to": "1998_25", "value": 4}, {"from": "Zetas", "opacity": 0.1, "to": "1999_25", "value": 1}, {"from": "Sinaloa", "opacity": 0.1, "to": "1991_26", "value": 1}, {"from": "Zetas", "opacity": 0.1, "to": "1993_26", "value": 1}, {"from": "Zetas", "opacity": 0.1, "to": "1994_26", "value": 1}, {"from": "Sinaloa", "opacity": 0.1, "to": "1995_26", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1996_26", "value": 1}, {"from": "Juarez", "opacity": 0.1, "to": "1997_26", "value": 3}, {"from": "Golfo", "opacity": 0.1, "to": "1998_26", "value": 1}, {"from": "Juarez", "opacity": 0.1, "to": "1998_26", "value": 2}, {"from": "Sinaloa", "opacity": 0.1, "to": "1998_26", "value": 2}, {"from": "Tijuana", "opacity": 0.1, "to": "1999_26", "value": 1}, {"from": "Zetas", "opacity": 0.1, "to": "1999_26", "value": 1}, {"from": "Zetas", "opacity": 0.1, "to": "1998_27", "value": 1}, {"from": "Golfo", "opacity": 0.1, "to": "1991_28", "value": 3}, {"from": "Golfo", "opacity": 0.1, "to": "1992_28", "value": 1}, {"from": "Sinaloa", "opacity": 0.1, "to": "1993_28", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1993_28", "value": 1}, {"from": "Golfo", "opacity": 0.1, "to": "1994_28", "value": 4}, {"from": "Golfo", "opacity": 0.1, "to": "1995_28", "value": 3}, {"from": "Golfo", "opacity": 0.1, "to": "1996_28", "value": 2}, {"from": "Juarez", "opacity": 0.1, "to": "1996_28", "value": 1}, {"from": "Golfo", "opacity": 0.1, "to": "1997_28", "value": 1}, {"from": "Juarez", "opacity": 0.1, "to": "1997_28", "value": 1}, {"from": "Sinaloa", "opacity": 0.1, "to": "1997_28", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1997_28", "value": 1}, {"from": "Golfo", "opacity": 0.1, "to": "1998_28", "value": 2}, {"from": "Juarez", "opacity": 0.1, "to": "1998_28", "value": 3}, {"from": "Juarez", "opacity": 0.1, "to": "1999_28", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1999_28", "value": 2}, {"from": "Juarez", "opacity": 0.1, "to": "1993_30", "value": 1}, {"from": "Sinaloa", "opacity": 0.1, "to": "1993_30", "value": 1}, {"from": "Golfo", "opacity": 0.1, "to": "1994_30", "value": 1}, {"from": "Golfo", "opacity": 0.1, "to": "1995_30", "value": 1}, {"from": "Juarez", "opacity": 0.1, "to": "1995_30", "value": 1}, {"from": "Golfo", "opacity": 0.1, "to": "1996_30", "value": 1}, {"from": "Juarez", "opacity": 0.1, "to": "1996_30", "value": 1}, {"from": "Golfo", "opacity": 0.1, "to": "1997_30", "value": 2}, {"from": "Juarez", "opacity": 0.1, "to": "1997_30", "value": 1}, {"from": "Golfo", "opacity": 0.1, "to": "1998_30", "value": 1}, {"from": "Juarez", "opacity": 0.1, "to": "1998_30", "value": 1}, {"from": "Juarez", "opacity": 0.1, "to": "1999_30", "value": 3}, {"from": "Sinaloa", "opacity": 0.1, "to": "1999_30", "value": 1}, {"from": "Golfo", "opacity": 0.1, "to": "1994_31", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1999_31", "value": 1}, {"from": "Tijuana", "opacity": 0.1, "to": "1997_32", "value": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": true
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "barnesHut": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.3,
+            "damping": 0.09,
+            "gravitationalConstant": -80000,
+            "springConstant": 0.001,
+            "springLength": 250
+        },
+        "enabled": true,
+        "repulsion": {
+            "centralGravity": 0.2,
+            "damping": 0.09,
+            "nodeDistance": 200,
+            "springConstant": 0.05,
+            "springLength": 80
+        },
+        "solver": "repulsion",
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+        network.on("stabilizationProgress", function(params) {
+      		document.getElementById('loadingBar').removeAttribute("style");
+	        var maxWidth = 496;
+	        var minWidth = 20;
+	        var widthFactor = params.iterations/params.total;
+	        var width = Math.max(minWidth,maxWidth * widthFactor);
+
+	        document.getElementById('bar').style.width = width + 'px';
+	        document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';
+	    });
+	    network.once("stabilizationIterationsDone", function() {
+	        document.getElementById('text').innerHTML = '100%';
+	        document.getElementById('bar').style.width = '496px';
+	        document.getElementById('loadingBar').style.opacity = 0;
+	        // really clean the dom element
+	        setTimeout(function () {document.getElementById('loadingBar').style.display = 'none';}, 500);
+	    });
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

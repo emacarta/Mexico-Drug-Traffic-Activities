@@ -1,0 +1,108 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-network@latest/styles/vis-network.css" type="text/css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vis-network@latest/dist/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1000px;
+            height: 1000px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "green", "id": "2", "label": "2", "shape": "dot", "size": 10}, {"color": "blue", "id": "1992", "label": "1992", "shape": "dot", "size": 10}, {"color": "blue", "id": "1993", "label": "1993", "shape": "dot", "size": 10}, {"color": "blue", "id": "1994", "label": "1994", "shape": "dot", "size": 10}, {"color": "blue", "id": "1999", "label": "1999", "shape": "dot", "size": 10}, {"color": "green", "id": "7", "label": "7", "shape": "dot", "size": 10}, {"color": "blue", "id": "1998", "label": "1998", "shape": "dot", "size": 10}, {"color": "green", "id": "9", "label": "9", "shape": "dot", "size": 10}, {"color": "green", "id": "11", "label": "11", "shape": "dot", "size": 10}, {"color": "green", "id": "15", "label": "15", "shape": "dot", "size": 10}, {"color": "blue", "id": "1996", "label": "1996", "shape": "dot", "size": 10}, {"color": "green", "id": "17", "label": "17", "shape": "dot", "size": 10}, {"color": "green", "id": "20", "label": "20", "shape": "dot", "size": 10}, {"color": "green", "id": "21", "label": "21", "shape": "dot", "size": 10}, {"color": "green", "id": "22", "label": "22", "shape": "dot", "size": 10}, {"color": "green", "id": "25", "label": "25", "shape": "dot", "size": 10}, {"color": "green", "id": "26", "label": "26", "shape": "dot", "size": 10}, {"color": "green", "id": "27", "label": "27", "shape": "dot", "size": 10}, {"color": "red", "id": "Zetas", "label": "Zetas", "shape": "dot", "size": 10}]);
+        edges = new vis.DataSet([{"from": "2", "label": 1, "to": "1992", "weight": 1}, {"from": "2", "label": 1, "to": "1993", "weight": 1}, {"from": "2", "label": 1, "to": "1994", "weight": 1}, {"from": "2", "label": 1, "to": "1999", "weight": 1}, {"from": "7", "label": 1, "to": "1998", "weight": 1}, {"from": "9", "label": 1, "to": "1994", "weight": 1}, {"from": "11", "label": 1, "to": "1994", "weight": 1}, {"from": "15", "label": 1, "to": "1994", "weight": 1}, {"from": "15", "label": 1, "to": "1996", "weight": 1}, {"from": "15", "label": 1, "to": "1999", "weight": 1}, {"from": "17", "label": 1, "to": "1999", "weight": 1}, {"from": "20", "label": 1, "to": "1998", "weight": 1}, {"from": "21", "label": 1, "to": "1998", "weight": 1}, {"from": "22", "label": 1, "to": "1994", "weight": 1}, {"from": "25", "label": 1, "to": "1992", "weight": 1}, {"from": "25", "label": 1, "to": "1993", "weight": 1}, {"from": "25", "label": 1, "to": "1994", "weight": 1}, {"from": "25", "label": 1, "to": "1999", "weight": 1}, {"from": "26", "label": 1, "to": "1993", "weight": 1}, {"from": "26", "label": 1, "to": "1994", "weight": 1}, {"from": "26", "label": 1, "to": "1999", "weight": 1}, {"from": "27", "label": 1, "to": "1998", "weight": 1}, {"from": "1992", "label": 2, "to": "Zetas", "weight": 2}, {"from": "1993", "label": 3, "to": "Zetas", "weight": 3}, {"from": "1994", "label": 10, "to": "Zetas", "weight": 10}, {"from": "1999", "label": 5, "to": "Zetas", "weight": 5}, {"from": "1998", "label": 5, "to": "Zetas", "weight": 5}, {"from": "1996", "label": 1, "to": "Zetas", "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
