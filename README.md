@@ -1,4 +1,4 @@
-# Mexicans-Drug-Cartel-Network-Analysis
+# Mexico Drug Traffic Activities
 ## Links:
 * https://projects.iq.harvard.edu/files/ptr/files/cosciarios.pdf
 * http://www.statoids.com/umx.html
