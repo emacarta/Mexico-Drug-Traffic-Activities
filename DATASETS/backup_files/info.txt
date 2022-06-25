@@ -1,1 +1,1 @@
-
+Questa cartella contiene tutti i file che vengono generati durante l'analisi
