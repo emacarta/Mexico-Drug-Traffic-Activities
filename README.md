@@ -25,21 +25,21 @@ Per le varie operazioni e la gestione dei dati sono state utilizzate le seguenti
 
 Le Network sono state create tramite l’utilizzo delle librerie:
 * NetworkX: networkx.org/
-* pyvis: pyvis.readthedocs.io/en/latest/
+* pyvis: https://pyvis.readthedocs.io/en/latest/
 * MatPlotLib: https://matplotlib.org/
 
 Tutte le mappe e i grafi dimostrativi sono statati creati appositamente da noi, tramite l’uso di PowerPoint.
 Le informazioni presenti nella ricerca sono state attinte da diversi siti Web durante i mesi di Maggio e Giugno 2022.
 
-* en.wikipedia.org/wiki/Sinaloa_Cartel
-* en.wikipedia.org/wiki/Los_Zetas
-* en.wikipedia.org/wiki/Tijuana_Cartel
-* en.wikipedia.org/wiki/Gulf_Cartel
-* en.wikipedia.org/wiki/Ju%C3%A1rez_Cartel
-* en.wikipedia.org/wiki/La_Familia_Michoacana
-* en.wikipedia.org/wiki/Beltr%C3%A1n-Leyva_Organization
-* projects.iq.harvard.edu/files/ptr/files/cosciarios.pdf
+* https://en.wikipedia.org/wiki/Sinaloa_Cartel
+* https://en.wikipedia.org/wiki/Los_Zetas
+* https://en.wikipedia.org/wiki/Tijuana_Cartel
+* https://en.wikipedia.org/wiki/Gulf_Cartel
+* https://en.wikipedia.org/wiki/Ju%C3%A1rez_Cartel
+* https://en.wikipedia.org/wiki/La_Familia_Michoacana
+* https://en.wikipedia.org/wiki/Beltr%C3%A1n-Leyva_Organization
+* https://projects.iq.harvard.edu/files/ptr/files/cosciarios.pdf
 * www.statoids.com/umx.html
 * www.publico.es/internacional/guerra-narco-desangra-ciudad-juarez.html
 * www.internazionale.it/notizie/2017/03/22/messico-veracruz-fosse-comuni
-* sgp.fas.org/crs/row/R41576.pdf
+* https://sgp.fas.org/crs/row/R41576.pdf
