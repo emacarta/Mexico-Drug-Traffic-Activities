@@ -1,8 +1,45 @@
 # Mexico Drug Traffic Activities
-## Links:
-* https://projects.iq.harvard.edu/files/ptr/files/cosciarios.pdf
-* http://www.statoids.com/umx.html
-* http://www.michelecoscia.com/?page_id=1032
-* https://www.publico.es/internacional/guerra-narco-desangra-ciudad-juarez.html
-* https://sgp.fas.org/crs/row/R41576.pdf
-* https://www.internazionale.it/notizie/2017/03/22/messico-veracruz-fosse-comuni
+
+## Info
+L’analisi che andremo ad effettuare riguarda le citazioni dei cartelli messicani sul motore di ricerca di Google, nella sezione delle news, tra il 1990 e il 2010. 
+
+VIDEO
+
+Gli obbiettivi dell’indagine sono quelli di comprendere quali dei cartelli presi in considerazione sono stati i più attivi durante quel periodo di tempo e su quali stati hanno avuto maggior influenza. Tutte queste analisi saranno accompagnate dalla descrizione dei contesti storici per avere una spiegazione globale dei dati presentati.
+
+![mappa_aree_cartelli](https://user-images.githubusercontent.com/104555763/175779396-958e6c23-098e-48b3-813a-18e7ffaa71f6.png)
+
+Infine cercheremo di sfruttare i nostri risultati per ottenere una rete di incontri tra i singoli cartelli, con lo scopo di individuare una gerarchia d’importanza.
+
+![intS_00](https://user-images.githubusercontent.com/104555763/175779428-767b590d-8478-4eb9-b3eb-315ac3dcd25a.png)
+
+## References:
+Il dataset usato per le nostre analisi:
+* www.michelecoscia.com/?page_id=1032
+
+Per le varie operazioni e la gestione dei dati sono state utilizzate le seguenti librerie:
+* Pandas
+* NumPy
+* itertools: www.docs.python.org/3/library/itertools.html
+* Collections: www.docs.python.org/3/library/collections.html
+
+Le Network sono state create tramite l’utilizzo delle librerie:
+* NetworkX: networkx.org/
+* pyvis: pyvis.readthedocs.io/en/latest/
+* MatPlotLib: https://matplotlib.org/
+
+Tutte le mappe e i grafi dimostrativi sono statati creati appositamente da noi, tramite l’uso di PowerPoint.
+Le informazioni presenti nella ricerca sono state attinte da diversi siti Web durante i mesi di Maggio e Giugno 2022.
+
+* en.wikipedia.org/wiki/Sinaloa_Cartel
+* en.wikipedia.org/wiki/Los_Zetas
+* en.wikipedia.org/wiki/Tijuana_Cartel
+* en.wikipedia.org/wiki/Gulf_Cartel
+* en.wikipedia.org/wiki/Ju%C3%A1rez_Cartel
+* en.wikipedia.org/wiki/La_Familia_Michoacana
+* en.wikipedia.org/wiki/Beltr%C3%A1n-Leyva_Organization
+* projects.iq.harvard.edu/files/ptr/files/cosciarios.pdf
+* www.statoids.com/umx.html
+* www.publico.es/internacional/guerra-narco-desangra-ciudad-juarez.html
+* www.internazionale.it/notizie/2017/03/22/messico-veracruz-fosse-comuni
+* sgp.fas.org/crs/row/R41576.pdf
