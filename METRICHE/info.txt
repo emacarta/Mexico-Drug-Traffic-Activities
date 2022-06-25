@@ -1,0 +1,3 @@
+In questa cartella verranno generati dei file txt e xlsx conteneti le metriche della network calcolate.
+
+ATTENZIONE: ogni volta che la funzione delle matriche verrà eseguita i file verranno sovrascritti
