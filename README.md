@@ -2,14 +2,16 @@
 
 ## Info
 L’analisi che andremo ad effettuare riguarda le citazioni dei cartelli messicani sul motore di ricerca di Google, nella sezione delle news, tra il 1990 e il 2010. 
-
-Gli obbiettivi dell’indagine sono quelli di comprendere quali dei cartelli presi in considerazione sono stati i più attivi durante quel periodo di tempo e su quali stati hanno avuto maggior influenza. Tutte queste analisi saranno accompagnate dalla descrizione dei contesti storici per avere una spiegazione globale dei dati presentati.
+Gli obbiettivi dell’indagine sono quelli di comprendere quali dei cartelli presi in considerazione risultino più attivi durante quel periodo di tempo e su quali stati della Federazione Messicana abbiano esercitato maggior influenza.
+Detti risultati verranno confrontati con le informazioni disponibili sul contesto storico, allo scopo di giungere a spiegazioni più plausibili della realtà analizzata.
 
 ![mappa_aree_cartelli](https://user-images.githubusercontent.com/104555763/175779396-958e6c23-098e-48b3-813a-18e7ffaa71f6.png)
 
-Infine cercheremo di sfruttare i nostri risultati per ottenere una rete di incontri tra i singoli cartelli, con lo scopo di individuare una gerarchia d’importanza.
+In fase conclusiva, cercheremo di organizzare i nostri risultati per ottenere una rete di incontri tra i singoli cartelli, al fine di ricostruire una gerarchia d’importanza.
 
 ![intS_00](https://user-images.githubusercontent.com/104555763/175779428-767b590d-8478-4eb9-b3eb-315ac3dcd25a.png)
+
+Tutte le analisi condotte in questa ricerca sono state svolte tramite l’utilizzo di Script Python (Versione 3.9.7), in Jupyter Notebook.
 
 ## References:
 Il dataset usato per le nostre analisi:
