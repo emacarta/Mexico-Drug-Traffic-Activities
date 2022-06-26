@@ -29,6 +29,7 @@ Le Network sono state create tramite l’utilizzo delle librerie:
 * MatPlotLib: https://matplotlib.org/
 
 Tutte le mappe e i grafi dimostrativi sono statati creati appositamente da noi, tramite l’uso di PowerPoint.
+
 Le informazioni presenti nella ricerca sono state attinte da diversi siti Web durante i mesi di Maggio e Giugno 2022.
 
 * https://en.wikipedia.org/wiki/Sinaloa_Cartel
