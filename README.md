@@ -5,17 +5,18 @@ The analysis that we are going to carry out concerns the citations of the Mexica
 
 ![mappa_aree_cartelli](https://user-images.githubusercontent.com/104555763/175779396-958e6c23-098e-48b3-813a-18e7ffaa71f6.png)
 
-In fase conclusiva, cercheremo di organizzare i nostri risultati per ottenere una rete di incontri tra i singoli cartelli, al fine di ricostruire una gerarchia d’importanza.
+In the final phase, we will try to organize our results to obtain a network of meetings between the individual cartels, in order to reconstruct a hierarchy of importance.
 
 ![intS_00](https://user-images.githubusercontent.com/104555763/175779428-767b590d-8478-4eb9-b3eb-315ac3dcd25a.png)
 
-Tutte le analisi condotte in questa ricerca sono state svolte tramite l’utilizzo di Script Python (Versione 3.9.7), in Jupyter Notebook.
+All the analysis conducted in this research was done through the use of Script Python (Version 3.9.7), in Jupyter Notebook.
+
 
 ## References:
-Il dataset usato per le nostre analisi:
+The dataset used for our analysis:
 * www.michelecoscia.com/?page_id=1032
 
-Per le varie operazioni e la gestione dei dati sono state utilizzate le seguenti librerie:
+The following libraries were used for the various operations and data management:
 * Pandas
 * NumPy
 * itertools: www.docs.python.org/3/library/itertools.html
@@ -26,9 +27,9 @@ Le Network sono state create tramite l’utilizzo delle librerie:
 * pyvis: https://pyvis.readthedocs.io/en/latest/
 * MatPlotLib: https://matplotlib.org/
 
-Tutte le mappe e i grafi dimostrativi sono statati creati appositamente da noi, tramite l’uso di PowerPoint.
+All maps and demonstration graphs were specially created by us through the use of PowerPoint.
 
-Le informazioni presenti nella ricerca sono state attinte da diversi siti Web durante i mesi di Maggio e Giugno 2022.
+The information in the research was drawn from various Web sites during May and June 2022.
 
 * https://en.wikipedia.org/wiki/Sinaloa_Cartel
 * https://en.wikipedia.org/wiki/Los_Zetas
