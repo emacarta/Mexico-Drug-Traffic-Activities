@@ -1,9 +1,7 @@
 # Mexico Drug Traffic Activities
 
 ## Info
-L’analisi che andremo ad effettuare riguarda le citazioni dei cartelli messicani sul motore di ricerca di Google, nella sezione delle news, tra il 1990 e il 2010. 
-Gli obbiettivi dell’indagine sono quelli di comprendere quali dei cartelli presi in considerazione risultino più attivi durante quel periodo di tempo e su quali stati della Federazione Messicana abbiano esercitato maggior influenza.
-Detti risultati verranno confrontati con le informazioni disponibili sul contesto storico, allo scopo di giungere a spiegazioni più plausibili della realtà analizzata.
+The analysis that we are going to carry out concerns the citations of the Mexican cartels on the Google search engine, in the news section, between 1990 and 2010. The objectives of the investigation are to understand which of the cartels taken into account are more active during that period of time and in which states of the Mexican Federation have exerted greater influence. These results will be compared with the information available on the historical context, in order to arrive at more plausible explanations of the reality analyzed.
 
 ![mappa_aree_cartelli](https://user-images.githubusercontent.com/104555763/175779396-958e6c23-098e-48b3-813a-18e7ffaa71f6.png)
 
