@@ -22,7 +22,7 @@ The following libraries were used for the various operations and data management
 * itertools: www.docs.python.org/3/library/itertools.html
 * Collections: www.docs.python.org/3/library/collections.html
 
-Le Network sono state create tramite l’utilizzo delle librerie:
+The Networks have been created through the use of the libraries:
 * NetworkX: https://networkx.org/
 * pyvis: https://pyvis.readthedocs.io/en/latest/
 * MatPlotLib: https://matplotlib.org/
